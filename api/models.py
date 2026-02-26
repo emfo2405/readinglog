@@ -26,4 +26,22 @@ class Review(models.Model):
 
 
 # Modell för lässtatus
+class Reading_status(models.Model):
+    READING_CHOICE = [
+        ("TOREAD", "Vill läsa"),
+        ("READING", "Pågående"),
+        ("READ", "Läst"),
+    ]
 
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    book = models.ForeignKey(Book, on_delete=models.CASCADE) 
+    status = models.CharField(max_length=15, choices=READING_CHOICE)
+    pages_read = models.IntegerField(default=0)
+    started_at = models.DateField(blank=True, null=True)
+    finished_at = models.DateField(blank=True, null=True)
+
+    class Meta:
+        unique_together = ("user", "book")
+
+    def __str__(self):
+        return f"{self.user.username} - {self.book.title} ({self.status})"
