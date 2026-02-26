@@ -26,7 +26,7 @@ class Review(models.Model):
 
 
 # Modell för lässtatus
-class Reading_status(models.Model):
+class ReadingStatus(models.Model):
     READING_CHOICE = [
         ("TOREAD", "Vill läsa"),
         ("READING", "Pågående"),
