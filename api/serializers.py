@@ -27,6 +27,15 @@ class ReadingStatusSerializer(serializers.ModelSerializer):
         model = ReadingStatus
         fields = '__all__'
 
+    def validate(self, attrs):
+        user = self.context['request'].user
+        book = attrs['book']
+
+        #Kolla om kombinationen är unik
+        if ReadingStatus.objects.filter(user=user, book=book).exclude(pk=getattr(self.instance, 'pk', None)).exists():
+            raise serializers.ValidationError("A reading status already exists for this book")
+        return attrs
+
 class RegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True, required=True, validators=[validate_password])
     password2 = serializers.CharField(write_only=True, required=True)
