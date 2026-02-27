@@ -1,11 +1,15 @@
-from django.urls import path
+from django.urls import path, include
 from .views import BookViewSet, ReviewViewSet, ReadingStatusViewSet, UserListView, RegisterView, ProfileView
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+from rest_framework.routers import DefaultRouter
+
+router = DefaultRouter()
+router.register('books/', BookViewSet)
+router.register('review/', ReviewViewSet)
+router.register('readingstatus/', ReadingStatusViewSet)
 
 urlpatterns = [
-    path('books/', BookViewSet.as_view(), name='books'),
-    path('review/', ReviewViewSet.as_view(), name='review'),
-    path('readingstatus/', ReadingStatusViewSet.as_view(), name='readingstatus'),
+    path('', include(router.urls)),
     path('users/', UserListView.as_view(), name='users'),
     path('login/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('refresh/', TokenRefreshView.as_view(), name='token_refresh'),
