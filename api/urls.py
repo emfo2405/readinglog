@@ -4,9 +4,9 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
-router.register('books/', BookViewSet)
-router.register('review/', ReviewViewSet)
-router.register('readingstatus/', ReadingStatusViewSet)
+router.register('books', BookViewSet)
+router.register('review', ReviewViewSet)
+router.register('readingstatus', ReadingStatusViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),

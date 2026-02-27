@@ -37,11 +37,15 @@ class RegisterSerializer(serializers.ModelSerializer):
 
     # Validera lösenord
     def validate(self, attrs):
-        if attrs['password'] != ['password2']:
+        if attrs['password'] != attrs['password2']:
             raise serializers.ValidationError({"password": "Passwords must match"}) 
+
+        return attrs
 
     # Skapa användare
     def create(self, validate_data):
+        validate_data.pop('password2')
+
         user = User.objects.create(
             username=validate_data['username'],
             email=validate_data['email']
