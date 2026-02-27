@@ -18,7 +18,7 @@ class BookViewSet(ModelViewSet):
 class ReviewViewSet(ModelViewSet):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAuthenticatedOrReadOnly, IsOwner]
 
     # Koppla review till user
     def perform_create(self, serializer):
@@ -28,7 +28,7 @@ class ReviewViewSet(ModelViewSet):
 class ReadingStatusViewSet(ModelViewSet):
     queryset = ReadingStatus.objects.all()
     serializer_class = ReadingStatusSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsOwner]
 
     # Koppla readingstatus till user
     def perform_create(self, serializer):
