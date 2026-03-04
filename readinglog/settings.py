@@ -33,7 +33,7 @@ SECRET_KEY = 'django-insecure-t&s-4-_7drkac9tiy7v9085y$u($_n4w1-=9e_8ii9si*37g0l
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["https://readinglog-65ok.onrender.com"]
 
 
 # Application definition
@@ -133,7 +133,6 @@ STATIC_URL = 'static/'
 #Inställningar för JWT med REST Framework
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.SessionAuthentication',
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
     'DEFAULT_PERMISSION_CLASSES': (
