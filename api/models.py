@@ -22,7 +22,7 @@ class Review(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.user.username} - {self.book.title}"
+        return f"{self.user.username} - {self.google_book_id}"
 
 
 # Modell för lässtatus
@@ -41,7 +41,7 @@ class ReadingStatus(models.Model):
     finished_at = models.DateField(blank=True, null=True)
 
     class Meta:
-        unique_together = ("user", "book")
+        unique_together = ("user", "google_book_id")
 
     def __str__(self):
-        return f"{self.user.username} - {self.book.title} ({self.status})"
+        return f"{self.user.username} - {self.google_book_id} ({self.status})"
