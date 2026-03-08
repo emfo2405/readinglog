@@ -29,10 +29,10 @@ class ReadingStatusSerializer(serializers.ModelSerializer):
 
     def validate(self, attrs):
         user = self.context['request'].user
-        book = attrs['book']
+        google_book_id = attrs['google_book_id']
 
         #Kolla om kombinationen är unik
-        if ReadingStatus.objects.filter(user=user, book=book).exclude(pk=getattr(self.instance, 'pk', None)).exists():
+        if ReadingStatus.objects.filter(user=user, google_book_id=google_book_id).exclude(pk=getattr(self.instance, 'pk', None)).exists():
             raise serializers.ValidationError("A reading status already exists for this book")
         return attrs
 
