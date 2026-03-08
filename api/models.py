@@ -16,7 +16,7 @@ class Book(models.Model):
 # Modell för recension
 class Review(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+    google_book_id = models.CharField(max_length=200)
     content = models.TextField(blank=True, null=True)
     review = models.IntegerField(blank=False, null=False)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -34,7 +34,7 @@ class ReadingStatus(models.Model):
     ]
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    book = models.ForeignKey(Book, on_delete=models.CASCADE) 
+    google_book_id = models.CharField(max_length=200) 
     status = models.CharField(max_length=15, choices=READING_CHOICE)
     pages_read = models.IntegerField(default=0)
     started_at = models.DateField(blank=True, null=True)
